@@ -29,11 +29,11 @@ function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [review, setReview] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const [filter, setFilter] = useState("Todos");
+  const [filter, setFilter] = useState("Todos");\n  const [scrollY, setScrollY] = useState(0);
   const gallery = useMemo(() => filter === "Todos" ? photos : photos.slice((["Cortes","Loiros","Coloração","Penteados","Tratamentos"].indexOf(filter)+1)%3, 6), [filter]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => { setScrolled(window.scrollY > 50); setScrollY(window.scrollY); };
     onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
     const io = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add("is-visible")), { threshold: .12 });
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
@@ -51,43 +51,43 @@ function Index() {
     {menu && <div className="mobile-menu"><button onClick={()=>setMenu(false)} aria-label="Fechar menu"><X/></button><div className="mobile-brand">STUDIO HAIR <em>CLÁUDIO BALTAZAR</em></div>{["Início","O Studio","Serviços","Transformações","Avaliações","Contato"].map((x,i)=><a onClick={()=>setMenu(false)} key={x} href={"#"+["inicio","studio","servicos","transformacoes","avaliacoes","contato"][i]}>{x}<ArrowRight/></a>)}</div>}
 
     <section id="inicio" className="hero">
-      <div className="hero-photo"/>
+      <div className="hero-photo" style={{ transform: `translate3d(0, ${Math.min(scrollY * .12, 90)}px, 0) scale(1.08)` }}/>
       <div className="hero-shade"/>
       <div className="hero-side">VALPARAÍSO DE GOIÁS · BEAUTY STUDIO</div>
       <div className="hero-content reveal is-visible">
         <p className="eyebrow">STUDIO HAIR · CLÁUDIO BALTAZAR</p>
         <h1>Sua beleza.<br/><i>Sua identidade.</i><br/>Seu momento.</h1>
-        <p className="hero-copy">Beleza, cuidado e experiência profissional em cada detalhe.</p>
-        <div className="hero-actions"><a className="btn-gold" href={whatsapp} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <ArrowRight/></a><a className="btn-line" href="#studio">Conhecer o studio</a></div>
-        <div className="hero-rating"><span>★★★★★</span><b>4,8 no Google</b><small>58 avaliações</small></div>
+        <p className="hero-copy hero-reveal r5">Beleza, cuidado e experiência profissional em cada detalhe.</p>
+        <div className="hero-actions hero-reveal r6"><a className="btn-gold" href={whatsapp} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <ArrowRight/></a><a className="btn-line" href="#studio">Conhecer o studio</a></div>
+        <div className="hero-rating hero-reveal r7"><span>★★★★★</span><b>4,8 no Google</b><small>58 avaliações</small></div>
       </div>
       <a className="scroll-hint" href="#studio">SCROLL TO DISCOVER <ArrowDown/></a>
     </section>
 
     <div className="credibility"><div className="ticker"><span>4,8 ★ NO GOOGLE</span><i/> <span>58 AVALIAÇÕES</span><i/> <span>ATENDIMENTO PROFISSIONAL</span><i/> <span>VALPARAÍSO DE GOIÁS</span></div></div>
 
-    <section id="studio" className="about section-pad">
+    <section id="studio" className="about section-pad"><div className="editorial-word" aria-hidden="true">ATELIER</div>
       <div className="about-visual reveal"><img src={photos[2]} alt="Experiência de beleza no Studio Hair" loading="lazy"/><span className="vertical-note">BELEZA · ESTILO · IDENTIDADE</span><div className="image-index">01</div></div>
       <div className="about-copy reveal"><p className="section-tag">01 / O STUDIO</p><h2>Beleza começa<br/>com <i>confiança.</i></h2><p>No Studio Hair Cláudio Baltazar, cada atendimento é pensado para valorizar a beleza, a personalidade e o estilo de cada cliente.</p><p>Técnica, experiência e cuidado se encontram em um ambiente dedicado a proporcionar transformações e momentos especiais.</p><blockquote>“Mais do que transformar cabelos,<br/> valorizamos pessoas.”</blockquote><div className="micro-stats"><span><b>4,8</b> Google</span><span><b>+58</b> avaliações</span><span><b>01:01</b> atendimento personalizado</span></div></div>
     </section>
 
-    <section id="servicos" className="services section-pad">
+    <section id="servicos" className="services section-pad"><div className="ghost-word" aria-hidden="true">BEAUTY</div>
       <div className="section-head reveal"><div><p className="section-tag">02 / SERVIÇOS</p><h2>Tudo para cuidar<br/>da sua <i>beleza.</i></h2></div><p>Experiência, técnica e cuidado reunidos em um só lugar.</p></div>
       <div className="service-list">{services.map((s,i)=><a className="service-row reveal" href={whatsapp} target="_blank" rel="noreferrer" key={s}><span>{String(i+1).padStart(2,"0")}</span><h3>{s}</h3><em>AGENDAR</em><ArrowRight/></a>)}</div>
     </section>
 
-    <section id="transformacoes" className="gallery section-pad">
+    <section id="transformacoes" className="gallery section-pad"><div className="gallery-rule"><span>STUDIO HAIR</span><i/><span>SELECTED WORK</span></div>
       <div className="section-head reveal"><div><p className="section-tag">03 / TRANSFORMAÇÕES</p><h2>Resultados que<br/><i>falam por si.</i></h2></div><p>Uma seleção visual de beleza, textura, cor e movimento.</p></div>
       <div className="filters">{["Todos","Cortes","Loiros","Coloração","Penteados","Tratamentos"].map(x=><button className={filter===x?"active":""} onClick={()=>setFilter(x)} key={x}>{x}</button>)}</div>
       <div className="masonry">{gallery.map((p,i)=><button className="gallery-item reveal" key={p+i} onClick={()=>setLightbox(photos.indexOf(p))}><img src={p} alt={"Transformação Studio Hair "+(i+1)} loading="lazy"/><span>VER TRABALHO <ArrowRight/></span></button>)}</div>
     </section>
 
-    <section className="experience section-pad">
+    <section className="experience section-pad"><div className="experience-kicker">THE ART OF<br/>BEAUTY</div>
       <div className="experience-title reveal"><p className="section-tag dark-tag">A EXPERIÊNCIA</p><h2>Cada detalhe faz<br/>parte da <i>experiência.</i></h2></div>
       <div className="experience-grid">{[["01","ATENDIMENTO","Escutamos você antes de qualquer transformação."],["02","TÉCNICA","Experiência e conhecimento aplicados em cada procedimento."],["03","CUIDADO","Produtos e técnicas pensados para preservar a saúde e beleza."],["04","RESULTADO","Um visual desenvolvido para valorizar sua personalidade."]].map(x=><article className="experience-item reveal" key={x[0]}><b>{x[0]}</b><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</div>
     </section>
 
-    <section id="avaliacoes" className="reviews section-pad">
+    <section id="avaliacoes" className="reviews section-pad"><div className="reviews-index">04</div>
       <div className="rating-block reveal"><p className="section-tag">04 / EXPERIÊNCIAS</p><div className="rating-number">4,8</div><div className="stars">★★★★★</div><p>58 avaliações no Google</p></div>
       <div className="review-slider reveal"><h2>Quem conhece,<br/><i>recomenda.</i></h2><div className="quote-mark">“</div><blockquote>{reviews[review]?.[0]}</blockquote><p>— {reviews[review]?.[1]}</p><div className="slider-controls"><button onClick={()=>setReview((review+2)%3)} aria-label="Anterior"><ChevronLeft/></button><span>{String(review+1).padStart(2,"0")} / 03</span><button onClick={()=>setReview((review+1)%3)} aria-label="Próximo"><ChevronRight/></button></div></div>
     </section>
@@ -97,7 +97,7 @@ function Index() {
       <div className="insta-grid">{photos.slice(1,5).map((p,i)=><a href={instagram} target="_blank" rel="noreferrer" key={p} className="insta-tile reveal"><img src={p} loading="lazy" alt={"Studio Hair no Instagram "+(i+1)}/><span>VER NO INSTAGRAM ↗</span></a>)}</div>
     </section>
 
-    <section className="big-cta"><div className="cta-photo"/><div className="cta-overlay"/><div className="cta-copy reveal"><p className="section-tag">SEU MOMENTO</p><h2>Pronto para<br/>uma nova versão<br/><i>de você?</i></h2><p>Reserve seu horário e viva a experiência Studio Hair Cláudio Baltazar.</p><a className="btn-gold" href={whatsapp} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <ArrowRight/></a><a className="phone-link" href="tel:+556136272800"><Phone/> (61) 3627-2800</a></div></section>
+    <section className="big-cta"><div className="cta-caption">VALPARAÍSO · GO <span>EST. BEAUTY EXPERIENCE</span></div><div className="cta-photo"/><div className="cta-overlay"/><div className="cta-copy reveal"><p className="section-tag">SEU MOMENTO</p><h2>Pronto para<br/>uma nova versão<br/><i>de você?</i></h2><p>Reserve seu horário e viva a experiência Studio Hair Cláudio Baltazar.</p><a className="btn-gold" href={whatsapp} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <ArrowRight/></a><a className="phone-link" href="tel:+556136272800"><Phone/> (61) 3627-2800</a></div></section>
 
     <section id="contato" className="location section-pad">
       <div className="location-copy reveal"><p className="section-tag dark-tag">05 / VISITE O STUDIO</p><h2>Seu momento<br/><i>começa aqui.</i></h2><h3>Studio Hair Cláudio Baltazar</h3><p>Qd. 58, Lote 16 · Rua 16, Loja 02<br/>Jardim Oriente · Valparaíso de Goiás – GO<br/>CEP 72870-213</p><div className="location-rating"><Star fill="currentColor"/> <b>4,8 no Google</b> · 58 avaliações</div><div className="location-actions"><a href={directions} target="_blank" rel="noreferrer">Como chegar <MapPin/></a><a href={whatsapp} target="_blank" rel="noreferrer">Agendar horário <ArrowRight/></a></div></div>
