@@ -89,7 +89,7 @@ function Index() {
 
     <section id="avaliacoes" className="reviews section-pad">
       <div className="rating-block reveal"><p className="section-tag">04 / EXPERIÊNCIAS</p><div className="rating-number">4,8</div><div className="stars">★★★★★</div><p>58 avaliações no Google</p></div>
-      <div className="review-slider reveal"><h2>Quem conhece,<br/><i>recomenda.</i></h2><div className="quote-mark">“</div><blockquote>{reviews[review][0]}</blockquote><p>— {reviews[review][1]}</p><div className="slider-controls"><button onClick={()=>setReview((review+2)%3)} aria-label="Anterior"><ChevronLeft/></button><span>{String(review+1).padStart(2,"0")} / 03</span><button onClick={()=>setReview((review+1)%3)} aria-label="Próximo"><ChevronRight/></button></div></div>
+      <div className="review-slider reveal"><h2>Quem conhece,<br/><i>recomenda.</i></h2><div className="quote-mark">“</div><blockquote>{reviews[review]?.[0]}</blockquote><p>— {reviews[review]?.[1]}</p><div className="slider-controls"><button onClick={()=>setReview((review+2)%3)} aria-label="Anterior"><ChevronLeft/></button><span>{String(review+1).padStart(2,"0")} / 03</span><button onClick={()=>setReview((review+1)%3)} aria-label="Próximo"><ChevronRight/></button></div></div>
     </section>
 
     <section className="instagram-section section-pad">

@@ -17,7 +17,10 @@ export const Route=createRootRouteWithContext<{queryClient:QueryClient}>()({
   {property:"og:description",content:"Beleza, cuidado e experiência profissional em cada detalhe."},
   {property:"og:type",content:"website"},
   {name:"twitter:card",content:"summary_large_image"}
- ],links:[{rel:"stylesheet",href:appCss},{rel:"icon",href:"/favicon.ico",type:"image/x-icon"}]}),
+ ],links:[{rel:"stylesheet",href:appCss},{rel:"icon",href:"/favicon.ico",type:"image/x-icon"},
+  {rel:"preconnect",href:"https://fonts.googleapis.com"},
+  {rel:"preconnect",href:"https://fonts.gstatic.com",crossOrigin:"anonymous"},
+  {rel:"stylesheet",href:"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap"}]}),
  shellComponent:RootShell,component:RootComponent,notFoundComponent:NotFoundComponent,errorComponent:ErrorComponent
 });
 function RootShell({children}:{children:ReactNode}){return <html lang="pt-BR"><head><HeadContent/></head><body>{children}<Scripts/></body></html>}
