@@ -40,7 +40,7 @@ function Index() {
     return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); };
   }, []);
 
-  return <main className="site-shell">
+  const submitBooking = (e: React.FormEvent<HTMLFormElement>) => {\n    e.preventDefault();\n    const fd = new FormData(e.currentTarget);\n    const message = `Olá! Vim pelo site do Studio Hair Cláudio Baltazar e gostaria de solicitar um agendamento.\\n\\nNome: ${fd.get("nome") || ""}\\nWhatsApp: ${fd.get("telefone") || ""}\\nServiço: ${fd.get("servico") || ""}\\nData: ${fd.get("data") || ""}\\nHorário: ${fd.get("horario") || ""}\\nObservações: ${fd.get("mensagem") || "Sem observações."}`;\n    window.open(`https://wa.me/5561999143292?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");\n  };\n\n  return <main className="site-shell">
     <header className={"nav " + (scrolled ? "nav-scrolled" : "")}>
       <a className="brand" href="#inicio"><span>STUDIO HAIR</span><b>CLÁUDIO BALTAZAR</b></a>
       <nav className="desktop-nav">{["Início","O Studio","Serviços","Transformações","Galeria","Avaliações","Contato"].map((x,i)=><a key={x} href={"#"+["inicio","studio","servicos","transformacoes","transformacoes","avaliacoes","contato"][i]}>{x}</a>)}</nav>
@@ -95,6 +95,30 @@ function Index() {
     <section className="instagram-section section-pad">
       <div className="insta-head reveal"><div><p className="section-tag dark-tag">SOCIAL</p><h2>Siga nossas<br/><i>transformações.</i></h2></div><a href={instagram} target="_blank" rel="noreferrer"><Instagram/> @claudiobaltazar2010 <ArrowRight/></a></div>
       <div className="insta-grid">{photos.slice(1,5).map((p,i)=><a href={instagram} target="_blank" rel="noreferrer" key={p} className="insta-tile reveal"><img src={p} loading="lazy" alt={"Studio Hair no Instagram "+(i+1)}/><span>VER NO INSTAGRAM ↗</span></a>)}</div>
+    </section>
+
+    <section id="agendamento" className="booking section-pad">
+      <div className="booking-art reveal">
+        <img src={photos[5]} alt="Experiência Studio Hair Cláudio Baltazar" loading="lazy"/>
+        <div className="booking-art-shade"/>
+        <div className="booking-art-copy"><span>PRIVATE APPOINTMENT</span><p>Um momento pensado<br/>especialmente para você.</p></div>
+        <div className="booking-number">05</div>
+      </div>
+      <div className="booking-form-wrap reveal">
+        <p className="section-tag">AGENDAMENTO / CONTATO</p>
+        <h2>Vamos cuidar<br/><i>de você?</i></h2>
+        <p className="booking-intro">Preencha seus dados e fale com o Studio Hair Cláudio Baltazar.</p>
+        <form className="booking-form" onSubmit={submitBooking}>
+          <label className="field field-wide"><span>Nome completo</span><input name="nome" type="text" placeholder="Seu nome" required autoComplete="name"/></label>
+          <label className="field"><span>WhatsApp</span><input name="telefone" type="tel" placeholder="(61) 9 9999-9999" required autoComplete="tel"/></label>
+          <label className="field"><span>Serviço desejado</span><select name="servico" required defaultValue=""><option value="" disabled>Selecione</option><option>Corte</option><option>Coloração/Loiros</option><option>Tratamento Capilar</option><option>Design de Sobrancelhas</option><option>Manicure</option><option>Pedicure</option><option>Penteado</option><option>Maquiagem</option><option>Outros</option></select></label>
+          <label className="field"><span>Data desejada</span><input name="data" type="date" required/></label>
+          <label className="field"><span>Horário de preferência</span><input name="horario" type="time" required/></label>
+          <label className="field field-wide"><span>Mensagem / observações</span><textarea name="mensagem" rows={3} placeholder="Conte-nos algum detalhe importante..."/></label>
+          <button className="booking-submit field-wide" type="submit"><span>Solicitar agendamento</span><ArrowRight/></button>
+        </form>
+        <div className="booking-foot"><span>01</span><p>Ao enviar, sua solicitação será organizada e aberta diretamente no WhatsApp do Studio.</p></div>
+      </div>
     </section>
 
     <section className="big-cta"><div className="cta-caption">VALPARAÍSO · GO <span>EST. BEAUTY EXPERIENCE</span></div><div className="cta-photo"/><div className="cta-overlay"/><div className="cta-copy reveal"><p className="section-tag">SEU MOMENTO</p><h2>Pronto para<br/>uma nova versão<br/><i>de você?</i></h2><p>Reserve seu horário e viva a experiência Studio Hair Cláudio Baltazar.</p><a className="btn-gold" href={whatsapp} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <ArrowRight/></a><a className="phone-link" href="tel:+556136272800"><Phone/> (61) 3627-2800</a></div></section>
