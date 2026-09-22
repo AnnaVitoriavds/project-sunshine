@@ -56,8 +56,8 @@ Observações: ${fd.get("mensagem") || "Sem observações."}`;
   };
 
   return <main className="site-shell">
-    <header className={"nav " + (scrolled ? "nav-scrolled" : "")}>
-      <a className="brand" href="#inicio"><span>STUDIO HAIR</span><b>CLÁUDIO BALTAZAR</b></a>
+    <header className={"nav reference-nav " + (scrolled ? "nav-scrolled" : "")}>
+      <a className="brand reference-brand" href="#inicio"><span>STUDIO</span><strong>HAIR</strong><b>CLÁUDIO BALTAZAR</b></a>
       <nav className="desktop-nav">{["Início","O Studio","Serviços","Transformações","Galeria","Avaliações","Contato"].map((x,i)=><a key={x} href={"#"+["inicio","studio","servicos","transformacoes","transformacoes","avaliacoes","contato"][i]}>{x}</a>)}</nav>
       <a className="nav-cta" href={whatsapp} target="_blank" rel="noreferrer">Agendar horário <ArrowRight size={15}/></a>
       <button className="menu-btn" onClick={()=>setMenu(true)} aria-label="Abrir menu"><Menu/></button>
@@ -65,21 +65,21 @@ Observações: ${fd.get("mensagem") || "Sem observações."}`;
 
     {menu && <div className="mobile-menu"><button onClick={()=>setMenu(false)} aria-label="Fechar menu"><X/></button><div className="mobile-brand">STUDIO HAIR <em>CLÁUDIO BALTAZAR</em></div>{["Início","O Studio","Serviços","Transformações","Avaliações","Contato"].map((x,i)=><a onClick={()=>setMenu(false)} key={x} href={"#"+["inicio","studio","servicos","transformacoes","avaliacoes","contato"][i]}>{x}<ArrowRight/></a>)}</div>}
 
-    <section id="inicio" className="hero">
+    <section id="inicio" className="hero reference-hero">
       <div className="hero-photo" style={{ transform: `translate3d(0, ${Math.min(scrollY * .12, 90)}px, 0) scale(1.08)` }}/>
       <div className="hero-shade"/>
-      <div className="hero-side">VALPARAÍSO DE GOIÁS · BEAUTY STUDIO</div>
+      <div className="hero-side">VALPARAÍSO DE GOIÁS · BEAUTY STUDIO</div><div className="hero-frame"/>
       <div className="hero-content reveal is-visible">
         <p className="eyebrow">STUDIO HAIR · CLÁUDIO BALTAZAR</p>
         <h1>Sua beleza.<br/><i>Sua identidade.</i><br/>Seu momento.</h1>
-        <p className="hero-copy hero-reveal r5">Beleza, cuidado e experiência profissional em cada detalhe.</p>
+        <p className="hero-kicker">Experiência de beleza 360°</p><div className="hero-copy-line"/><p className="hero-copy hero-reveal r5">Cortes, loiros, coloração, tratamentos e beleza — reunidos em uma experiência de cuidado, técnica e transformação.</p>
         <div className="hero-actions hero-reveal r6"><a className="btn-gold" href={whatsapp} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <ArrowRight/></a><a className="btn-line" href="#studio">Conhecer o studio</a></div>
         <div className="hero-rating hero-reveal r7"><span>★★★★★</span><b>4,8 no Google</b><small>58 avaliações</small></div>
       </div>
-      <a className="scroll-hint" href="#studio">SCROLL TO DISCOVER <ArrowDown/></a>
+      <a className="scroll-hint" href="#studio">ROLE PARA DESCOBRIR <ArrowDown/></a>
     </section>
 
-    <div className="credibility"><div className="ticker"><span>4,8 ★ NO GOOGLE</span><i/> <span>58 AVALIAÇÕES</span><i/> <span>ATENDIMENTO PROFISSIONAL</span><i/> <span>VALPARAÍSO DE GOIÁS</span></div></div>
+    <div className="credibility reference-marquee"><div className="ticker"><span>4,8 ★ NO GOOGLE</span><i/> <span>58 AVALIAÇÕES</span><i/> <span>ATENDIMENTO PROFISSIONAL</span><i/> <span>VALPARAÍSO DE GOIÁS</span></div></div>
 
     <section id="studio" className="about section-pad"><div className="editorial-word" aria-hidden="true">ATELIER</div>
       <div className="about-visual reveal"><img src={photos[2]} alt="Experiência de beleza no Studio Hair" loading="lazy"/><span className="vertical-note">BELEZA · ESTILO · IDENTIDADE</span><div className="image-index">01</div></div>
