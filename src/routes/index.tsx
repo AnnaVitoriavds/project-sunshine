@@ -29,7 +29,8 @@ function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [review, setReview] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const [filter, setFilter] = useState("Todos");\n  const [scrollY, setScrollY] = useState(0);
+  const [filter, setFilter] = useState("Todos");
+  const [scrollY, setScrollY] = useState(0);
   const gallery = useMemo(() => filter === "Todos" ? photos : photos.slice((["Cortes","Loiros","Coloração","Penteados","Tratamentos"].indexOf(filter)+1)%3, 6), [filter]);
 
   useEffect(() => {
@@ -40,7 +41,21 @@ function Index() {
     return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); };
   }, []);
 
-  const submitBooking = (e: React.FormEvent<HTMLFormElement>) => {\n    e.preventDefault();\n    const fd = new FormData(e.currentTarget);\n    const message = `Olá! Vim pelo site do Studio Hair Cláudio Baltazar e gostaria de solicitar um agendamento.\\n\\nNome: ${fd.get("nome") || ""}\\nWhatsApp: ${fd.get("telefone") || ""}\\nServiço: ${fd.get("servico") || ""}\\nData: ${fd.get("data") || ""}\\nHorário: ${fd.get("horario") || ""}\\nObservações: ${fd.get("mensagem") || "Sem observações."}`;\n    window.open(`https://wa.me/5561999143292?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");\n  };\n\n  return <main className="site-shell">
+  const submitBooking = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const message = `Olá! Vim pelo site do Studio Hair Cláudio Baltazar e gostaria de solicitar um agendamento.\
+\
+Nome: ${fd.get("nome") || ""}\
+WhatsApp: ${fd.get("telefone") || ""}\
+Serviço: ${fd.get("servico") || ""}\
+Data: ${fd.get("data") || ""}\
+Horário: ${fd.get("horario") || ""}\
+Observações: ${fd.get("mensagem") || "Sem observações."}`;
+    window.open(`https://wa.me/5561999143292?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+  };
+
+  return <main className="site-shell">
     <header className={"nav " + (scrolled ? "nav-scrolled" : "")}>
       <a className="brand" href="#inicio"><span>STUDIO HAIR</span><b>CLÁUDIO BALTAZAR</b></a>
       <nav className="desktop-nav">{["Início","O Studio","Serviços","Transformações","Galeria","Avaliações","Contato"].map((x,i)=><a key={x} href={"#"+["inicio","studio","servicos","transformacoes","transformacoes","avaliacoes","contato"][i]}>{x}</a>)}</nav>
